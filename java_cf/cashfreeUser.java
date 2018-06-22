@@ -64,6 +64,7 @@ public class cashfreeUser {
     public String makePostCall(String link, Map<String, String> headers, String postData)
     {
         String response = "";
+        //exception handling for if connection times out
         try {
             URL myURL = new URL(link);
 
@@ -126,7 +127,7 @@ public class cashfreeUser {
     public String makeGetCall(String endpoint, Map<String, String> headers, Map<String, String> getParametersMap)
     {
         String response = "";
-
+        //exception handling for if connection times out
         try {
 
             if(!getParametersMap.isEmpty()){
@@ -184,7 +185,9 @@ public class cashfreeUser {
 
 
 
-    public String addBeneficiary(String beneId, String name, String email, String phone, String bankAccount, String ifsc, String address1, String address2, String vpa, String city, String state, String pincode) throws Exception {
+    public String addBeneficiary(String beneId, String name, String email, String phone, String bankAccount, String ifsc, 
+                                 String address1, String address2, String vpa, String city, String state, String pincode) 
+                                 throws Exception {
 
         if ((beneId == null) || (name  == null) || (email == null ) || (phone == null) || (address1 ==null)){
             return  "Mandatory parameters missing";
@@ -346,11 +349,13 @@ public class cashfreeUser {
             String token = this.token;
             String link = "";
             if (this.stage == "TEST") {
-                 link = "https://payout-gamma.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
+                 link = "https://payout-gamma.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + 
+                         "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
             }
             else if (this.stage =="PROD")
             {
-                 link = "https://payout-api.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
+                 link = "https://payout-api.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + 
+                         phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
 
             }
 
