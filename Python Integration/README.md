@@ -24,7 +24,6 @@ user1.clientAuth('dummyClientId','dummyClientSecret',"TEST/PROD"
 You can perform the following functions : 
 
 **Add Beneficiary**
-
 ```
 user1.addBeneficiary('JOHN180121','john doe', 'johndoe@cashfree.com', '9876543210','00091111202233','HDFC0000001','vpa','ABC Street','add 2','Bangalore', 'Karnataka','560001' )
 ```
@@ -48,6 +47,20 @@ user1.bankDetailsValidation("Joh",'9910115208', '00011020001772', 'HDFC0000001')
 
 ```
 user1.getBalance()
+
 ```
+
+## Found a bug?
+
+Report it at [https://github.com/cashfree/payout_integration_kits/issues](https://github.com/cashfree/payout_integration_kits/issues)
+
+# Support
+
+For further queries, reach us at techsupport@gocashfree.com .
+
+********************************************************************************** 
+
+
+
 
 
