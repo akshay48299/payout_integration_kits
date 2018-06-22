@@ -5,7 +5,7 @@ Python bindings for interacting with the Cashfree API. This is useful for mercha
 # Using 
 
 As you can see there are two files. "Execute.js" is a guide to calling the API.
-NOTE : Ensure that "execute.py" and "cfPayout.js" are in the same folder.
+NOTE : Ensure that "execute.js" and "cfPayout.js" are in the same folder.
 
 # Setting Up
 
