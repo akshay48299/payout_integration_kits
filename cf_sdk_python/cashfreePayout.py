@@ -163,7 +163,7 @@ class cashfreeUser:
             temp.expiryCheck()
             
             if (cashfreeUser.stage == "TEST"):
-                linkTransferStatus = "https://payout-gamma.cashfree.com/payout/v1/getTransferStatus" + "?transferId="+transferId
+                linkTransferStatus = "https://payout-gamma.cashfree.com/payout/v1/getTransferStatus" + "?transferId="+ transferId
             elif (cashfreeUser.stage == "PROD"):
                 linkTransferStatus = "https://payout-api.cashfree.com/payout/v1/getTransferStatus" + "?transferId="+transferId  
 
