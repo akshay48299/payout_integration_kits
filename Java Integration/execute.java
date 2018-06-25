@@ -1,15 +1,17 @@
-import cashfreeUser.*;
+package cashfreeUser_java_integration;
+
 
 public class execute{
+
+    public static void main(String[] args)throws Exception {
+        
+        cfPayout newuser = new cfPayout();
+
+        System.out.println(newuser.clientAuth("sampleClientId","sampleClientSecret","TEST/PROD"));
+
+    }
 
 
 }
 
-    public static void main(String[] args) {
-        System.out.println("TELST");
-        
-        execute example = new execute();
 
-        System.out.println(example.clientAuth("!21","12","TEST"));
-
-    }
