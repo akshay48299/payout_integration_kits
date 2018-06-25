@@ -377,7 +377,7 @@ public class cfPayout {
     }
 
  public static void main(String[] args) throws  Exception {
-
+    /*
     System.out.println(newuser.clientAuth("CF27D9CZCLC0ZHYUE26", "b4c83b231adae60400ce303361ecadeacc004916","TEST"));
     newuser.expiryCheck();
    System.out.println(newuser.addBeneficiary("JOHN180120","john doe", "johndoe@cashfree.com", "9876543210","00091181202233","HDFC0000001","ABC Street","add 2","vpa","Bangalore", "Karnataka","560001" ));
@@ -386,7 +386,7 @@ public class cfPayout {
   System.out.println(newuser.getTransferStatus("76723288672267867867"));
   System.out.println(newuser.bankDetailsValidation("Joh","9910115208", "00011020001772", "HDFC0000001"));
 
-    
+   */ 
 }
 
        
