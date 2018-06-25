@@ -34,7 +34,7 @@ class cashfreeUser{
 
         var request = require('sync-request')
         
-        this.jsonresponse = request("POST","https://payout­-gamma.cashfree.com//payout/v1/authorize", { 
+        this.jsonresponse = request("POST",linkAuthorize, { 
             headers:
             {
             'content-type':'application/json',
