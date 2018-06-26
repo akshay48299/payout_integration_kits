@@ -22,7 +22,7 @@ class cashfreeUser:
         cashfreeUser.stage = stage
         linkAuthorize = ""
         if (cashfreeUser.stage == "TEST"):
-            linkAuthorize = "https://payout­-gamma.cashfree.com//payout/v1/authorize"
+            linkAuthorize = "https://payout­-gamma.cashfree.com/payout/v1/authorize"
         elif (cashfreeUser.stage == "PROD"):
             linkAuthorize = "https://payout­-api.cashfree.com//payout/v1/authorize"
 
@@ -33,17 +33,22 @@ class cashfreeUser:
         try:
             jsonData = requests.post(url = linkAuthorize, headers = headers)
             jsonData = json.loads(jsonData.text)
+            if jsonData["status"] == "ERROR":
+                return jsonData["message"]
             cashfreeUser.token = jsonData["data"]["token"]
             cashfreeUser.expiry = jsonData["data"]["expiry"]
 
-            return cashfreeUser.token
+            return str(cashfreeUser.token)
         except:
             return "Empty JSON response"
 
     def expiryCheck(self):
 
         currenttime = int(time.time())
-        expirytime = int(cashfreeUser.expiry)
+        if (cashfreeUser.expiry != None) : 
+            expirytime = int(cashfreeUser.expiry)
+        else : 
+            return "Empty JSON response. Cannot perform expiry check."
 
         #makes check for if the token expires within the next minute and generates a new one 
         if (currenttime - expirytime < 60):
@@ -113,7 +118,7 @@ class cashfreeUser:
         try:
             jsonData = requests.get(url = linkAddBeneficiary, headers = headers)
             jsonData = json.loads(jsonData.text)
-
+            
             return jsonData
         except:
             return "Empty JSON response"
@@ -208,4 +213,8 @@ class cashfreeUser:
                 return jsonData
             except:
                 return "Empty JSON response"
+
+
+
+
 
