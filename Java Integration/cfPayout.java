@@ -1,9 +1,10 @@
 
+package cashfreeUser_java_integration;
+
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class cfPayout {
+public class cashfreeUser {
     public static String token;
     public static Long expiry;
     public static String clientId;
@@ -48,16 +49,22 @@ public class cfPayout {
 
         JSONParser parser = new JSONParser();
         JSONObject responseObj = (JSONObject) parser.parse(response);
-        String getToken = (String) ((JSONObject)responseObj.get("data")).get("token");
-        String tempexpiry = (String) ((JSONObject)responseObj.get("data")).get("expiry");
-        Long getExpiry = Long.parseLong(tempexpiry);
+        String status = (String) responseObj.get("status");
+        String message = ((String)responseObj.get("message"));
+        if (status.equals("ERROR")){
+            return message;
+        }
+        else {
+            String getToken = (String) ((JSONObject) responseObj.get("data")).get("token");
+            String tempexpiry = (String) ((JSONObject) responseObj.get("data")).get("expiry");
+            Long getExpiry = Long.parseLong(tempexpiry);
 
 
-        this.token = getToken;
-        this.expiry = getExpiry;
+            this.token = getToken;
+            this.expiry = getExpiry;
 
-        return getToken;
-
+            return getToken;
+        }
     }
 
 
@@ -173,8 +180,8 @@ public class cfPayout {
 
         if (expirytime - currenttime <=60){
 
-            cfPayout temp = new cfPayout();
-            return temp.clientAuth(this.clientId, this.clientSecret);
+            cashfreeUser temp = new cashfreeUser();
+            return temp.clientAuth(this.clientId, this.clientSecret, this.stage);
         }
 
         else {
@@ -211,16 +218,16 @@ public class cfPayout {
 
 
 
-            cfPayout temp = new cfPayout();
+            cashfreeUser temp = new cashfreeUser();
             temp.expiryCheck();
             String token = this.token;
 
             HashMap<String,String> headers =new HashMap<String,String>();
             headers.put("Content-Type", "application/json");
             headers.put("Authorization", "Bearer " + token);
-            String link;
+            String link = "";
             if (this.stage == "TEST") {
-                 link = "https://payout-gamma.cashfree.com/payout/v1/addBeneficiary";
+                link = "https://payout-gamma.cashfree.com/payout/v1/addBeneficiary";
             }
             else if (this.stage == "PROD")
             {
@@ -245,7 +252,7 @@ public class cfPayout {
         HashMap<String,String> header =new HashMap<String,String>();
         header.put("Authorization", "Bearer " + token);
 
-        cfPayout temp = new cfPayout();
+        cashfreeUser temp = new cashfreeUser();
         temp.expiryCheck();
         String link = "";
 
@@ -257,7 +264,7 @@ public class cfPayout {
         }
 
 
-            HashMap<String,String> getData = new HashMap<String, String>();
+        HashMap<String,String> getData = new HashMap<String, String>();
 
         String response = makeGetCall(link,header,getData);
 
@@ -287,7 +294,7 @@ public class cfPayout {
 
             String token = this.token;
 
-            cfPayout temp = new cfPayout();
+            cashfreeUser temp = new cashfreeUser();
             temp.expiryCheck();
 
             HashMap<String,String> headers =new HashMap<String,String>();
@@ -315,7 +322,7 @@ public class cfPayout {
         HashMap<String,String> getData =new HashMap<String,String>();
 
 
-        cfPayout temp = new cfPayout();
+        cashfreeUser temp = new cashfreeUser();
         temp.expiryCheck();
         String link = "";
         if (this.stage == "TEST") {
@@ -346,11 +353,11 @@ public class cfPayout {
             String token = this.token;
             String link = "";
             if (this.stage == "TEST") {
-                 link = "https://payout-gamma.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
+                link = "https://payout-gamma.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
             }
             else if (this.stage =="PROD")
             {
-                 link = "https://payout-api.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
+                link = "https://payout-api.cashfree.com/payout/v1/validation/bankDetails" + "?name=" + name + "&phone=" + phone + "&bankAccount=" + bankAccount + "&ifsc=" + ifsc;
 
             }
 
@@ -376,21 +383,19 @@ public class cfPayout {
 
     }
 
- public static void main(String[] args) throws  Exception {
-    /*
-    System.out.println(newuser.clientAuth("CF27D9CZCLC0ZHYUE26", "b4c83b231adae60400ce303361ecadeacc004916","TEST"));
-    newuser.expiryCheck();
-   System.out.println(newuser.addBeneficiary("JOHN180120","john doe", "johndoe@cashfree.com", "9876543210","00091181202233","HDFC0000001","ABC Street","add 2","vpa","Bangalore", "Karnataka","560001" ));
-   System.out.println(newuser.getBalance());
-  System.out.println(newuser.requestTransfer("JOHN18011","100","76723288672267867867","banktransfer","optional"));
-  System.out.println(newuser.getTransferStatus("76723288672267867867"));
-  System.out.println(newuser.bankDetailsValidation("Joh","9910115208", "00011020001772", "HDFC0000001"));
+    public static void main(String[] args) throws Exception{
+        cashfreeUser newuser = new cashfreeUser();
 
-   */ 
-}
+        System.out.println(newuser.clientAuth("CF27D9CZCLC0ZHYUE26", "b4c83b231adae60400ce303361ecadeacc004916","TEST"));
+        newuser.expiryCheck();
+        System.out.println(newuser.addBeneficiary("JOHN180120","john doe", "johndoe@cashfree.com", "9876543210","00091181202233","HDFC0000001","ABC Street","add 2","vpa","Bangalore", "Karnataka","560001" ));
+        System.out.println(newuser.getBalance());
+        System.out.println(newuser.requestTransfer("JOHN18011","100","76723288672267867867","banktransfer","optional"));
+        System.out.println(newuser.getTransferStatus("76723288672267867867"));
+        System.out.println(newuser.bankDetailsValidation("Joh","9910115208", "00011020001772", "HDFC0000001"));
 
-       
 
+    }
 }
 
 
