@@ -2,7 +2,7 @@ const user = require('./cfPayout.js');
 
 let user2 = new user;
 
-user2.clientAuth('CF27D9CZCLC0ZHYUE26','b4c83b231adae60400ce303361ecadeacc004916',"TEST")
+user2.clientAuth('dummyClientId','dummyclientSecret',"TEST/PROD")
 user2.expiryCheck()
 user2.addBeneficiary('JOHN180121','john doe', 'johndoe@cashfree.com', '9876543210','00091111202233','HDFC0000001','vpa','ABC Street','add 2','Bangalore', 'Karnataka','560001' )
 user2.requestTransfer('JOHN18011','100','76723288672267867867','banktransfer','optional')
