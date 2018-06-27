@@ -24,30 +24,29 @@ You can perform the following functions :
 
 **Add Beneficiary**
 ```
-        System.out.println(newuser.addBeneficiary("JOHN180120","john doe", "johndoe@cashfree.com", "9876543210","00091181202233","HDFC0000001","ABC Street","add 2","vpa","Bangalore", "Karnataka","560001" ));
+System.out.println(newuser.addBeneficiary("JOHN180120","john doe", "johndoe@cashfree.com", "9876543210","00091181202233","HDFC0000001","ABC Street","add 2","vpa","Bangalore", "Karnataka","560001" ));
 
 ```
 
 **Request Transfer**
 ```
-        System.out.println(newuser.requestTransfer("JOHN18011","100","76723288672267867867","banktransfer","optional"));
+System.out.println(newuser.requestTransfer("JOHN18011","100","76723288672267867867","banktransfer","optional"));
 ```
 **Get Transfer Status**
 
 ```
-        System.out.println(newuser.getTransferStatus("76723288672267867867"));
+System.out.println(newuser.getTransferStatus("76723288672267867867"));
 ```
 **Validate Bank Details**
 
 ```
-        System.out.println(newuser.bankDetailsValidation("Joh","9910115208", "00011020001772", "HDFC0000001"));
+System.out.println(newuser.bankDetailsValidation("Joh","9910115208", "00011020001772", "HDFC0000001"));
 ```
 
 **Check Balance**
 
 ```
-        System.out.println(newuser.getBalance());
-
+System.out.println(newuser.getBalance());
 ```
 
 ## Found a bug?
